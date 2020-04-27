@@ -14,6 +14,17 @@ class Game extends React.Component {
     }
 
     handleClick(i) {
+    const location = [
+            [1, 1],
+            [2, 1],
+            [3, 1],
+            [1, 2],
+            [2, 2],
+            [3, 2],
+            [1, 3],
+            [2, 3],
+            [3, 3]
+        ];
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -23,7 +34,8 @@ class Game extends React.Component {
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history:history.concat([{
-                squares: squares
+                squares: squares,
+                location: location[i] 
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
@@ -46,11 +58,13 @@ class Game extends React.Component {
 
         const moves = history.map((step, move) => {
             const desc = move ?
-            'Go to move #' + move :
+            'Go to move #' + move + " Location of the Square is at: " + history[move].location:
             'Go to game start';
+
             return(
                 <li key = {move}>
-                    <button onClick = {() => this.jumpTo(move)}>{desc}</button>
+                    <button onClick = {() => this.jumpTo(move)}>
+                        {move == this.state.stepNumber ? <b>{desc}</b> : desc}</button>
                 </li>
             )
         })
