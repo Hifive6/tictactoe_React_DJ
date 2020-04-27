@@ -1,5 +1,6 @@
 {
   "name": "tic-tac-toe_react",
+  "author": "David Juarez",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
